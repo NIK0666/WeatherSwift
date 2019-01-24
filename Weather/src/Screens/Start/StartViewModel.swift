@@ -63,8 +63,8 @@ class StartViewModel: StartViewModelProtocol {
         currentLocationTapped.asObservable().subscribe({ _ in
             self.isStartActive.accept(false)
         }).disposed(by: disposeBag)
-        
-        currentLocation.asObservable().subscribe({ coord in
+        currentLocation.debounce(0.3, scheduler: MainScheduler.instance)
+        .asObservable().subscribe({ coord in
             guard coord.element! != nil else { return }
             self.locationTitle.accept("Current location")
             self.city = nil //Обнулим город
