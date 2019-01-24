@@ -2,7 +2,7 @@
 Weather app developed on Swift 4.2 using MVVM + Router architecture
 
 ## Used in project:
-- RxSwift used for binding
+- RxSwift for bindings
 - Database of cities is stored in RealmSwift
 - OpenWeatherMap service to get weather data
 - TimeZoneDb to get local time zone
