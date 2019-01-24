@@ -76,7 +76,7 @@ class StartViewModel: StartViewModelProtocol {
             self.isStartActive.accept(false)
             self.city = city
             self.currentLocation.accept(nil) //Обнулим координату
-            self.locationTitle.accept("\(city.name!), \(city.country!)")
+            self.locationTitle.accept(city.fullLocation())
             
             self.requestInformation() //TODO Дергаем сервисы
         }).disposed(by: disposeBag)

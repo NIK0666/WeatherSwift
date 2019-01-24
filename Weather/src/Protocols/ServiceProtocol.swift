@@ -23,7 +23,6 @@ extension ServiceProtocol {
                     failure(response.result.error!)
                     return
                 }
-                print(response.request?.url?.absoluteString)
                 complition(response.data!)
         }
     }

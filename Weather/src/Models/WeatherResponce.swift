@@ -22,7 +22,17 @@ struct WeatherResponce: Codable {
     var sys: Sys
     var id: Int?
     var name: String?
-    var cod: Int?    
+    var cod: Int?
+    
+    func iconName() -> String{
+        
+        guard let currentWeather = weather.first else {
+            assertionFailure("Bad weather model!")
+            return ""
+        }
+        return currentWeather.main.lowercased()
+    }
+    
 }
 
 struct ForecastResponse: Codable {
@@ -31,6 +41,11 @@ struct ForecastResponse: Codable {
     var cnt: Int
     var list: [WeatherResponce]
     var city: CityResponce
+    
+    func fullLocation() -> String {
+        return "\(city.name), \(city.country)"
+    }
+    
 }
 
 struct CityResponce: Codable {

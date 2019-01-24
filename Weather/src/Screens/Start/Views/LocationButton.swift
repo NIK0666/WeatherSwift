@@ -16,7 +16,7 @@ class LocationButton: UIButton {
                 setTitle("ENTER LOCATION", for: .normal)
                 return
             }
-            setTitle("\(currentCity.name!), \(currentCity.country!)", for: .normal)
+            setTitle(currentCity.fullLocation(), for: .normal)
         }
     }
     

@@ -16,6 +16,7 @@ protocol GeneralViewModelProtocol: ViewModelProtocol {
     var weatherIconName: BehaviorRelay<String?> { get }
     var temperatureString: BehaviorRelay<String> { get }
     var descriptionString: BehaviorRelay<String> { get }
+    var showLoadingIndicator: BehaviorRelay<Bool> { get }
     var periods: BehaviorRelay<[PeriodModel]> { get }
     
     var model: BehaviorSubject<GeneralModel?> { get }
@@ -31,7 +32,9 @@ class GeneralViewModel: GeneralViewModelProtocol {
     let weatherIconName = BehaviorRelay<String?>(value: nil)
     let temperatureString = BehaviorRelay<String>(value: "")
     let descriptionString = BehaviorRelay<String>(value: "")
+    let showLoadingIndicator = BehaviorRelay<Bool>(value: false)
     let periods = BehaviorRelay<[PeriodModel]>(value: [])
+    
     
     let model = BehaviorSubject<GeneralModel?>(value: nil)
     var searchTapped = PublishSubject<Void>()
@@ -69,6 +72,7 @@ class GeneralViewModel: GeneralViewModelProtocol {
                 self.temperatureString.accept("")
                 self.descriptionString.accept("")
                 self.periods.accept([])
+                self.showLoadingIndicator.accept(true)
                 return
             }
             
@@ -77,17 +81,19 @@ class GeneralViewModel: GeneralViewModelProtocol {
                 return
             }
             
+            self.showLoadingIndicator.accept(false)
+            
             //Selected location
             var location: String!
             if let city = weatherModel.city {
-                location = "\(city.name!), \(city.country!)"
+                location = city.fullLocation()
             } else {
-                location = "\(weatherModel.forecast.city.name), \(weatherModel.forecast.city.country)"
+                location = weatherModel.forecast.fullLocation()
             }
             self.locationTitle.accept(location)
             
             //Current weather
-            self.weatherIconName.accept(currentWeather.main.lowercased())
+            self.weatherIconName.accept(weatherModel.weather.iconName())
             self.descriptionString.accept(currentWeather.description.capitalizingFirstLetter())
             self.temperatureString.accept(self.tempToString(weatherModel.weather.main.temp))
             
@@ -98,8 +104,11 @@ class GeneralViewModel: GeneralViewModelProtocol {
             
             //Periods
             self.periods.accept(weatherModel.forecast.list.map{ (elem) -> PeriodModel in
-                return PeriodModel(temperature: self.tempToString(elem.main.temp), iconName: elem.weather.first!.main.lowercased(), timestamp: elem.dt)
+                let offset = Int((weatherModel.timeZone.timestamp - weatherModel.weather.dt) / 3600) * 3600
+                return PeriodModel(temperature: self.tempToString(elem.main.temp), iconName: elem.iconName(), timestamp: elem.dt + offset)
             })
+            
+            
             
             
         }).disposed(by: disposeBag)
@@ -146,5 +155,4 @@ class GeneralViewModel: GeneralViewModelProtocol {
     func tempToString(_ temp: Double) -> String {
         return "\(Int(temp.rounded() - 273))°С"
     }
-    
 }

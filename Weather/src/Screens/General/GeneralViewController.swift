@@ -22,6 +22,7 @@ class GeneralViewController: UIViewController, GradientBackgroundProtocol {
     @IBOutlet private weak var statusIconView: UIImageView!
     @IBOutlet private weak var detailsCollectionView: UICollectionView!
     @IBOutlet private weak var searchButton: UIButton!
+    @IBOutlet private weak var activityIndicatorView: UIActivityIndicatorView!
     
     private let particleEmitter = CAEmitterLayer()
     private let disposeBag = DisposeBag()
@@ -44,6 +45,7 @@ class GeneralViewController: UIViewController, GradientBackgroundProtocol {
         }).disposed(by: disposeBag)
         viewModel.temperatureString.bind(to: temperatureLabel.rx.text).disposed(by: disposeBag)
         viewModel.currentTimeString.bind(to: dateLabel.rx.text).disposed(by: disposeBag)
+        viewModel.showLoadingIndicator.asObservable().bind(to: activityIndicatorView.rx.isAnimating).disposed(by: disposeBag)
         
         //Periods list
         viewModel.periods.asObservable().bind(to: detailsCollectionView.rx.items) { (collectionView, row, element) in
@@ -53,7 +55,6 @@ class GeneralViewController: UIViewController, GradientBackgroundProtocol {
         }.disposed(by: disposeBag)
         detailsCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
         searchButton.rx.tap.bind(to: viewModel.searchTapped).disposed(by: disposeBag)
-
     }
     
     private func registerCells() {

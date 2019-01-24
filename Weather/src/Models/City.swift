@@ -14,4 +14,8 @@ class City: Object {
     @objc dynamic var name: String!
     @objc dynamic var lon = 0.0
     @objc dynamic var lat = 0.0
+    
+    func fullLocation() -> String {
+        return "\(name!), \(country!)"
+    }
 }

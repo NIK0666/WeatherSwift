@@ -13,6 +13,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GeneralViewController" customModule="Weather" customModuleProvider="target">
             <connections>
+                <outlet property="activityIndicatorView" destination="frm-UF-6o6" id="PaW-Ug-ABi"/>
                 <outlet property="dateLabel" destination="0It-Pt-pN3" id="Aju-6b-SBP"/>
                 <outlet property="descriptionLabel" destination="NnM-Sw-3iY" id="3t5-h9-CcX"/>
                 <outlet property="detailsCollectionView" destination="CLK-IW-GXc" id="AcC-O9-Tfh"/>
@@ -28,6 +29,9 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="frm-UF-6o6">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                </activityIndicatorView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HgE-fv-RQg">
                     <rect key="frame" x="16" y="179.5" width="343" height="200"/>
                     <subviews>
@@ -121,10 +125,14 @@
                 <constraint firstItem="HgE-fv-RQg" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" constant="-64" id="PEy-M7-G4T"/>
                 <constraint firstItem="CLK-IW-GXc" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="SVc-TK-r9m"/>
                 <constraint firstItem="NnM-Sw-3iY" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="T7i-JH-roV"/>
+                <constraint firstItem="frm-UF-6o6" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="W3z-cM-Zb8"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="NnM-Sw-3iY" secondAttribute="trailing" constant="16" id="XJ5-DG-k2b"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="HgE-fv-RQg" secondAttribute="trailing" constant="16" id="YN1-gj-ugp"/>
+                <constraint firstItem="frm-UF-6o6" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="YPu-oU-QqI"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ya7-BP-21V" secondAttribute="trailing" constant="8" id="epH-CA-h3i"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="CLK-IW-GXc" secondAttribute="bottom" constant="44" id="gZj-YA-vlU"/>
+                <constraint firstItem="frm-UF-6o6" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" id="i5l-0A-JAx"/>
+                <constraint firstItem="frm-UF-6o6" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="vbo-0l-dKp"/>
                 <constraint firstItem="ya7-BP-21V" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="xTU-lJ-JsS"/>
                 <constraint firstItem="HgE-fv-RQg" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="yxq-2F-QP1"/>
             </constraints>
