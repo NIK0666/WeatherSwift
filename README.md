@@ -8,9 +8,9 @@ Weather app developed on Swift 4.2 using MVVM + Router architecture
 - TimeZoneDb to get local time zone
 
 ## TODO:
-- Add activity indicator
 - Moon icon instead sun at night time
-- Show correct time in the forecast list
+- Implement saving a list of recently selected cities
+- Implement show the last selected city at startup
 
 ## Screenshots:
 ![](demonstration.gif)
