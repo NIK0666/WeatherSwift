@@ -8,12 +8,22 @@
 
 import UIKit
 
-class NUButton: UIButton {
-
+@IBDesignable class NUButton: UIButton {
+    
+    @IBInspectable var borderWidth: CGFloat = 1
+    @IBInspectable var borderColor: UIColor = #colorLiteral(red: 0.200000003, green: 0.200000003, blue: 0.200000003, alpha: 1)
+    
+    override func prepareForInterfaceBuilder() {
+        styleView()
+    }
     override func awakeFromNib() {
+        styleView()
+    }
+    
+    func styleView() {
         layer.cornerRadius = frame.height / 2
-        layer.borderWidth = 1
-        layer.borderColor = #colorLiteral(red: 0.200000003, green: 0.200000003, blue: 0.200000003, alpha: 1)
+        layer.borderWidth = borderWidth
+        layer.borderColor = borderColor.cgColor
     }
     
     
@@ -26,5 +36,6 @@ class NUButton: UIButton {
             }
         }
     }
-
+    
 }
+
